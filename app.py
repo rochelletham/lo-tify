@@ -1,7 +1,6 @@
 import re
 from flask import Flask, redirect, render_template, request, jsonify, url_for
 import os
-from flask.scaffold import F
 import requests
 
 from secret import *

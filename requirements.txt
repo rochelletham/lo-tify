@@ -1,3 +1,6 @@
 Flask
 requests
 spotipy
+os
+numpy 
+scipy

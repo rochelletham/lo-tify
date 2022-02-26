@@ -31,12 +31,13 @@ def login():
 def spotify_login():
   sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=lotify_client,
                                                client_secret=lotify_client_secret,
-                                               redirect_uri=url_for('callback'),
+                                               redirect_uri=redirect_uri,
                                                scope="user-library-read"))
   results = sp.current_user_saved_tracks()
   for idx, item in enumerate(results['items']):
       track = item['track']
       print(idx, track['artists'][0]['name'], " – ", track['name'])
+  return "YAY", 200
 
 @app.route('/callback')
 def callback():

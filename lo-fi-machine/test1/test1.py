@@ -5,7 +5,7 @@ def lambda_handler(event, context):
     s3 = boto3.client('s3')
     
     # Output the bucket names
-    print("THIS IS MORE NEW!")
+    print("THIS IS EVEN MORE NEW!")
     print('Existing object:')
     response = s3.get_object(
         Bucket="lo-tify",

@@ -3,6 +3,7 @@ from flask import Flask, redirect, render_template, request, jsonify, url_for
 import os
 from flask.scaffold import F
 import requests
+from pydub import AudioSegment
 
 from secret import *
 
@@ -11,10 +12,6 @@ from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
 
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=lotify_client,
                                                            client_secret=lotify_client_secret))
-
-results = sp.search(q='weezer', limit=20)
-for idx, track in enumerate(results['tracks']['items']):
-    print(idx, track['name'])
 
 app = Flask(__name__)
 
@@ -33,10 +30,21 @@ def spotify_login():
                                                client_secret=lotify_client_secret,
                                                redirect_uri=redirect_uri,
                                                scope="user-library-read"))
-  results = sp.current_user_saved_tracks()
+  results = sp.current_user_top_tracks(limit=5, time_range="long_term")
   for idx, item in enumerate(results['items']):
       track = item['track']
       print(idx, track['artists'][0]['name'], " – ", track['name'])
+
+      # Spotify returns .mp3 preview
+      mp3_preview = requests.get(track['preview_url'])
+      with open(f"audio/{track['name']}.mp3", "wb") as fd:
+        fd.write(mp3_preview.content)
+      
+      # convert .mp3 to .wav
+      sound = AudioSegment.from_file(f"audio/{track['name']}.mp3")
+      sound.export(f"audio/{track['name']}.wav")
+      os.remove(f"audio/{track['name']}.mp3")
+
   return "YAY", 200
 
 @app.route('/callback')

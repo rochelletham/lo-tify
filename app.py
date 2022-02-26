@@ -9,15 +9,20 @@ from secret import *
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
 
-sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=lotify_client,
-                                                           client_secret=lotify_client_secret))
+# generic call 
+# sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=lotify_client,
+#                                                            client_secret=lotify_client_secret))
 
-results = sp.search(q='weezer', limit=20)
-for idx, track in enumerate(results['tracks']['items']):
-    print(idx, track['name'])
+# results = sp.search(q='weezer', limit=20)
+# for idx, track in enumerate(results['tracks']['items']):
+#     print(idx, track['name'])
+
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=lotify_client,
+                                               client_secret=lotify_client_secret,
+                                               redirect_uri=redirect_uri,
+                                               scope="user-library-read"))
 
 app = Flask(__name__)
-
 # Route for "/" (frontend):
 @app.route('/')
 def index():
@@ -29,10 +34,6 @@ def login():
 
 @app.route('/spotify_login')
 def spotify_login():
-  sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=lotify_client,
-                                               client_secret=lotify_client_secret,
-                                               redirect_uri=redirect_uri,
-                                               scope="user-library-read"))
   results = sp.current_user_saved_tracks()
   for idx, item in enumerate(results['items']):
       track = item['track']

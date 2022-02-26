@@ -17,10 +17,15 @@
       <label for="course1" class="col-sm-2 col-form-label">Login to your spotify</label>
     </div>
 
-    <button onclick="sendPOST();" class="btn btn-secondary">Click Here</button>
+    <button id="spotifyLoginButton"  class="btn btn-secondary">Click Here</button>
 
     <div id="content">
     </div>
   </div>
+  <script>
+    document.getElementById("spotifyLoginButton").onclick = function redirect_to_spotify_login() {
+      location.href = "/spotify_login";
+    }
+  </script>
 </body>
 </html>

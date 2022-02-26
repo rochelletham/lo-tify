@@ -1,5 +1,5 @@
 import re
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, redirect, render_template, request, jsonify, url_for
 import os
 from flask.scaffold import F
 import requests
@@ -7,7 +7,7 @@ import requests
 from secret import *
 
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
 
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=lotify_client,
                                                            client_secret=lotify_client_secret))
@@ -23,6 +23,25 @@ app = Flask(__name__)
 def index():
   return render_template("index.html")
  
+@app.route('/login.html')
+def login():
+  return render_template("login.html")
+
+@app.route('/spotify_login')
+def spotify_login():
+  sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=lotify_client,
+                                               client_secret=lotify_client_secret,
+                                               redirect_uri=url_for('callback'),
+                                               scope="user-library-read"))
+  results = sp.current_user_saved_tracks()
+  for idx, item in enumerate(results['items']):
+      track = item['track']
+      print(idx, track['artists'][0]['name'], " – ", track['name'])
+
+@app.route('/callback')
+def callback():
+  return render_template("spotify_login_callback.html")
+
 @app.route('/spotify', methods=["POST"])
 def POST_spotify():
   # spotify API call 

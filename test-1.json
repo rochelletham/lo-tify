@@ -1,0 +1,32 @@
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "awsRegion": "us-east-2",
+      "eventTime": "2022-02-26T16:32:03.870Z",
+      "eventName": "ObjectCreated:Put",
+      "userIdentity": { "principalId": "A2NEB694GJKZHX" },
+      "requestParameters": { "sourceIPAddress": "130.126.255.234" },
+      "responseElements": {
+        "x-amz-request-id": "JRQSVAEVM2K2TWPH",
+        "x-amz-id-2": "tC1OY1b1pqpRdA98dJErjNLm+W+gNmfllsouzbrbMeBlCJiNNQzJKSNuBuJ/Sl28mwbqztBMMTQdzP38EnYkPF7mLPujiCqj"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "1fe67c26-de5d-4683-86b5-6fab1dfdcc3e",
+        "bucket": {
+          "name": "lo-tify",
+          "ownerIdentity": { "principalId": "A2NEB694GJKZHX" },
+          "arn": "arn:aws:s3:::lo-tify"
+        },
+        "object": {
+          "key": "slinky_held2.png",
+          "size": 622642,
+          "eTag": "bb7717b241e57b08ba22794fedd71351",
+          "sequencer": "00621A5603CBFE9372"
+        }
+      }
+    }
+  ]
+}

@@ -30,10 +30,10 @@ def spotify_login():
   for idx, item in enumerate(results['items']):
       track = item['track']
       print(idx, track['artists'][0]['name'], " – ", track['name'])
-  return "YAY", 200
+#   return "YAY", 200
 
-@app.route('/callback')
-def callback():
+# @app.route('/callback')
+# def callback():
   return render_template("spotify_login_callback.html")
 
 @app.route('/spotify', methods=["POST"])

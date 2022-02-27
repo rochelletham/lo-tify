@@ -35,10 +35,15 @@ def login():
 @app.route('/spotify_login')
 def spotify_login():
   results = sp.current_user_saved_tracks()
+  
   for idx, item in enumerate(results['items']):
-      track = item['track']
-      print(idx, track['artists'][0]['name'], " – ", track['name'])
-  return "YAY", 200
+    track = item['track']
+    artist = track['artists'][0]
+    print(idx, artist['name'], " – ", track['name'])
+    print('   audio      {}'.format(track['external_urls']['spotify']))
+
+  return results, 200
+
 
 @app.route('/callback')
 def callback():

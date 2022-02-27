@@ -1,6 +1,8 @@
-Flask
+flask
 requests
 spotipy
-os
+# os
 numpy 
 scipy
+pydub
+spotipy

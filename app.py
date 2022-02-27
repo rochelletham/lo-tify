@@ -34,7 +34,7 @@ def spotify_login():
   results = sp.current_user_top_tracks(limit=5, time_range="long_term")
   for idx, item in enumerate(results['items']):
       track = item['track']
-      print(idx, track['artists'][0]['name'], " – ", track['name'])
+      print(idx, track['artists'][0]['name'], " - ", track['name'])
 
       # Spotify returns .mp3 preview
       mp3_preview = requests.get(track['preview_url'])
@@ -60,4 +60,7 @@ def POST_spotify():
   if (spotify is None):
     return f"No data available", 404
   
-  spotify_data = spotify.json()   
+  spotify_data = spotify.json()
+
+if __name__ == "__main__":
+  app.run(host="0.0.0.0", port=0)

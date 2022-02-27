@@ -10,10 +10,10 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
 
 
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=lotify_client,
-                                               client_secret=lotify_client_secret,
-                                               redirect_uri=redirect_uri,
-                                               scope="user-library-read"))
+# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=lotify_client,
+#                                                client_secret=lotify_client_secret,
+#                                                redirect_uri=redirect_uri,
+#                                                scope="user-library-read"))
 
 app = Flask(__name__)
 # Route for "/" (frontend):
@@ -63,4 +63,4 @@ def POST_spotify():
   spotify_data = spotify.json()
 
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", port=0)
+  app.run(host="0.0.0.0", port=5000)

@@ -5,7 +5,7 @@ def main(event, context):
     s3 = boto3.client('s3')
     
     # Output the bucket names
-    print("This is from the synthesis directory AGAIN AGAIN AGAIN.")
+    print("This is from the synthesis directory AGAIN AGAIN AGAIN AGAIN.")
     response = s3.get_object(
         Bucket="lo-tify",
         Key='text.txt',
